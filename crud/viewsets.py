@@ -132,11 +132,7 @@ def GetAllCart (request):
     # user_id = request.POST.get('user_id')
     PurchaseCarts = Cart.objects.all()
 
-    data = {
-        "status":
-    }
-
-        return JsonResponse(data,safe=False)
+    #return JsonResponse(data,safe=False)
 
 class getAllCart(generics.ListAPIView):
     queryset = Cart.objects.all()
@@ -187,10 +183,14 @@ def computeTicketValue(request):
         usario_carrito = request.POST.get('user_id')
         #carrito_products = request.POST.get('cart_id')  # el string es como lo manda en el reques
         cart = Cart.objects.get(user_id=usario_carrito)
-        obj_producto = ProductoCarrito.objects.filter(cart_id=cart)
-        ticket = obj_producto.all().aggregate(Sum('total'))
-        print ticket
-        return JsonResponse(ticket,safe=False)
+        if cart.status.description == 'comprado':
+                obj_producto = ProductoCarrito.objects.filter(cart_id=cart)
+                ticket = obj_producto.all().aggregate(Sum('total'))
+                print ticket
+                return JsonResponse(ticket,safe=False)
+        else:
+            print cart.status.description
+            return JsonResponse('necesitas comprar el carro', safe=False)
 
 
 @csrf_exempt
