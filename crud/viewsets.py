@@ -17,6 +17,7 @@ from django.http import JsonResponse, JsonResponse
 from django.db.models import Exists
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Avg, Max, Min, Sum
 
 class CreateProduct(APIView):
     parser_classes = (FormParser, JSONParser, MultiPartParser)
@@ -29,6 +30,10 @@ class CreateProduct(APIView):
 
         else:
             return Response(serializer_class.errors, status=status.HTTP_404_NOT_FOUND)
+
+class ProductList(generics.ListAPIView):
+    queryset = Product2.objects.all()
+    serializer_class = Product2Serializer
 
 class UserCreate(generics.ListCreateAPIView):
     parser_classes = (FormParser, JSONParser,MultiPartParser)
@@ -126,22 +131,16 @@ def GetAllCart (request):
     response_list = []
     # user_id = request.POST.get('user_id')
     PurchaseCarts = Cart.objects.all()
-    VerPrpductoCarrito = ProductoCarrito.objects.all()
-    if PurchaseCarts.count() > 0:
-        for p in PurchaseCarts:
-            for v in VerPrpductoCarrito:
-                print p.pk
-                data = {
-                    "status": p.status.description,
-                    "user_name": p.user.username,
-                    "producto": v.product.name,
-                }
-                response_list.append(data)
 
-        return JsonResponse(response_list, safe=False)
-    else:
-        return JsonResponse('error', safe=False)
+    data = {
+        "status":
+    }
 
+        return JsonResponse(data,safe=False)
+
+class getAllCart(generics.ListAPIView):
+    queryset = Cart.objects.all()
+    serializer_class = CartSerializer
 
 @csrf_exempt
 def getUserCart(request):
@@ -172,7 +171,43 @@ def BuyCart(request):
         comprobar_carrito = Cart.objects.get(pk=valPost)
         comprobar_carrito.status_id = 1
         comprobar_carrito.save()
-        print comprobar_carrito.status.description
+        #print comprobar_carrito.status.description
+
+        data = {
+            "status": comprobar_carrito.status.description,
+            "cart_id": comprobar_carrito.id,
+            "username": comprobar_carrito.user.username
+        }
+        return JsonResponse(data,safe=False)
+
+@csrf_exempt
+def computeTicketValue(request):
+    if request.method == 'POST':
+
+        usario_carrito = request.POST.get('user_id')
+        #carrito_products = request.POST.get('cart_id')  # el string es como lo manda en el reques
+        cart = Cart.objects.get(user_id=usario_carrito)
+        obj_producto = ProductoCarrito.objects.filter(cart_id=cart)
+        ticket = obj_producto.all().aggregate(Sum('total'))
+        print ticket
+        return JsonResponse(ticket,safe=False)
+
+
+@csrf_exempt
+def DeleteCart(request):
+    if request.method == 'POST':
+        usario_carrito = request.POST.get('user_id')
+        cart = Cart.objects.get(user_id=usario_carrito)
+        cart.status_id = 3
+        cart.save()
+
+        data = {
+            "status": cart.status.description,
+            "cart_id": cart.id,
+            "username": cart.user.username
+        }
+        return JsonResponse(data,safe=False)
+
 
 
 

@@ -39,3 +39,6 @@ class ProductoCarrito(models.Model):
     product = models.ForeignKey(Product2)
     total = models.FloatField()
     quantity = models.IntegerField()
+
+    def __unicode__(self):
+        return unicode(self.product)
