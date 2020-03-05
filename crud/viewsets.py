@@ -84,6 +84,7 @@ def AddCart(request):
 
             try:
                 comprobar_carrito = Cart.objects.get(pk=valPost)
+            
                 print "tiene carrito"
 
                 product_id = request.POST.get('product_id')
@@ -126,6 +127,8 @@ def AddCart(request):
                 return JsonResponse(data, safe=False)
 
 
+
+
 def GetAllCart (request):
     print " Is in"
     response_list = []
@@ -151,7 +154,9 @@ def getUserCart(request):
                 data = {
                     "status": p.cart.status.description,
                     "user_name": p.cart.user.username,
-                    "producto": p.product.name
+                    "producto": p.product.name,
+                    "quantity": p.quantity,
+                    "stock": p.product.stock
                 }
                 response_list.append(data)
 
@@ -165,15 +170,22 @@ def BuyCart(request):
     if request.method == "POST":
         valPost = request.POST.get('user_id')
         comprobar_carrito = Cart.objects.get(pk=valPost)
+
         comprobar_carrito.status_id = 1
         comprobar_carrito.save()
-        #print comprobar_carrito.status.description
 
+        PurchaseCarts = ProductoCarrito.objects.filter(cart_id=valPost)
+        for p in PurchaseCarts:
+           total_stock = p.product.stock - p.quantity
+           p.product.stock = total_stock
+           p.product.save()
+
+           print "total:" + str(total_stock)
         data = {
             "status": comprobar_carrito.status.description,
             "cart_id": comprobar_carrito.id,
             "username": comprobar_carrito.user.username
-        }
+                }
         return JsonResponse(data,safe=False)
 
 @csrf_exempt

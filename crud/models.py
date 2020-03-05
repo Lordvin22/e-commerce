@@ -19,6 +19,9 @@ class Product2(models.Model):
     stock = models.IntegerField(blank=True)
     price = models.IntegerField(blank=True)
 
+    def __unicode__(self):
+        return unicode(self.name)
+
 
 class StatusCarrito(models.Model):
     description = models.CharField(max_length= 30,default=True, blank=True)
