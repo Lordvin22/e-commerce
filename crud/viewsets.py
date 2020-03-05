@@ -88,18 +88,23 @@ def AddCart(request):
                 product_id = request.POST.get('product_id')
                 quantity = request.POST.get('quantity')
                 product = Product2.objects.get(pk=product_id)
-                total = product.price * int(quantity)
-                purchase = ProductoCarrito(cart_id=user_id, product_id=product_id, total=total, quantity=quantity,
-                                           status_id=2)
-                purchase.save()
-                data = {
-                    "user_id": user_id,
-                    "cart_id": comprobar_carrito.id,
-                    "product_id": product_id,
-                    "quantity": quantity,
-                    "total": total,
-                }
-                return JsonResponse(data, safe=False)
+                print product.stock
+                if product.stock < 0:
+                    return JsonResponse ('producto sin stock', safe=False)
+                else:
+                    total = product.price * int(quantity)
+                    purchase = ProductoCarrito(cart_id=user_id, product_id=product_id, total=total, quantity=quantity,
+                                               status_id=2)
+                    purchase.status.id = 2
+                    purchase.save()
+                    data = {
+                        "user_id": user_id,
+                        "cart_id": comprobar_carrito.id,
+                        "product_id": product_id,
+                        "quantity": quantity,
+                        "total": total,
+                    }
+                    return JsonResponse(data, safe=False)
 
 
             except ObjectDoesNotExist:
@@ -112,21 +117,25 @@ def AddCart(request):
                 quantity = request.POST.get('quantity')
                 product = Product2.objects.get(pk=product_id)
                 total = product.price * int(quantity)
-                purchase = ProductoCarrito(cart_id=user_id, product_id=product_id, total=total, quantity=quantity,
-                                           status_id=2)
+                if product.stock < 0:
+                    return JsonResponse('producto sin stock', safe=False)
+                else:
 
-                purchase.save()
-                data = {
+                    purchase = ProductoCarrito(cart_id=user_id, product_id=product_id, total=total, quantity=quantity,
+                                               status_id=2)
 
-                    "message": "carrito creado",
-                    "user_id": user_id,
-                    "product_id": product_id,
-                    "quantity": quantity,
-                    "total": total,
-                    # "cart_id": comprobar_carrito
-                }
+                    purchase.save()
+                    data = {
 
-                return JsonResponse(data, safe=False)
+                        "message": "carrito creado",
+                        "user_id": user_id,
+                        "product_id": product_id,
+                        "quantity": quantity,
+                        "total": total,
+                        # "cart_id": comprobar_carrito
+                    }
+
+                    return JsonResponse(data, safe=False)
 
 def GetAllCart (request):
     print " Is in"
@@ -148,14 +157,16 @@ def getUserCart(request):
     print user_id
     cart = Cart.objects.get(user_id=user_id)
     value = ProductoCarrito.objects.filter(cart_id=user_id)
+
     print value
     if value.count() > 0:
         for p in value:
                 print p.cart_id
                 print "staus compra",p.status.description
                 data = {
+
                     "user": cart.user.username,
-                    "status": cart.status.description,
+                    "status": p.status.description,
                     "producto": p.product.name,
                     "quantity": p.quantity,
                     "stock": p.product.stock
@@ -172,26 +183,28 @@ def BuyCart(request):
     if request.method == "POST":
         user_id = request.POST.get('user_id')
         cart_status = Cart.objects.get(user_id=user_id)
-        value = ProductoCarrito.objects.get(cart_id=user_id)
-        cart_status.status.id = 1
-        #comprobar_producto.status_id = 2
+        #product_status = ProductoCarrito.objects.filter(cart_id=cart_status)
+
+        cart_status.status_id = 1
+        #product_status.status = 1
         cart_status.save()
-        #comprobar_producto.save()
+        #product_status.save()
 
         PurchaseCarts = ProductoCarrito.objects.filter(cart_id=user_id)
         for p in PurchaseCarts:
-            if p.product.stock < 0:
-               total_stock = p.product.stock - p.quantity
-               p.product.stock = total_stock
-               p.product.save()
+           total_stock = p.product.stock - p.quantity
+           p.product.stock = total_stock
+           p.product.save()
+           p.status_id = 1
+           p.save()
 
-               print "total:" + str(total_stock)
-            data = {
-                "status": cart_status.status.description,
-                "cart_id":  cart_status.id,
-                "username": cart_status.user.username
-                    }
-            return JsonResponse(data,safe=False)
+           print "total:" + str(total_stock)
+        data = {
+            "status": cart_status.status.description,
+            "cart_id": cart_status.id,
+            "username": cart_status.user.username
+                }
+        return JsonResponse(data,safe=False)
 
 @csrf_exempt
 def computeTicketValue(request):

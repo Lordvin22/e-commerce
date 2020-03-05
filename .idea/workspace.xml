@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc138a55-bd1b-4ddf-a2b0-39c97870134b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/crud/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/crud/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/crud/viewsets.py" beforeDir="false" afterPath="$PROJECT_DIR$/crud/viewsets.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
@@ -53,6 +52,13 @@
         <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
         <item name="crud_productocarrito: table" type="3d80ac25:SqliteImplModel$Table" />
       </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="db" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
+        <item name="crud_statuscarrito: table" type="3d80ac25:SqliteImplModel$Table" />
+      </path>
     </expand>
     <select />
   </component>
@@ -67,8 +73,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/crud/viewsets.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="89" column="61" selection-start-line="89" selection-start-column="61" selection-end-line="89" selection-end-column="61" />
+            <state relative-caret-position="214">
+              <caret line="190" column="9" selection-start-line="190" selection-start-column="9" selection-end-line="190" selection-end-column="9" />
               <folding>
                 <element signature="e#0#46#0" expanded="true" />
               </folding>
@@ -77,10 +83,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/venv/lib/python2.7/site-packages/django/core/handlers/base.py">
+        <entry file="file://$PROJECT_DIR$/venv/lib/python2.7/site-packages/django/core/handlers/exception.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="195">
-              <caret line="186" selection-start-line="186" selection-end-line="186" />
+              <caret line="40" selection-start-line="40" selection-end-line="40" />
             </state>
           </provider>
         </entry>
@@ -90,6 +96,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="188">
               <caret line="379" selection-start-line="379" selection-end-line="379" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://bd12c120-96e9-4554-91ce-25df46365c10/schema/main/table/crud_statuscarrito">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
@@ -182,9 +197,9 @@
         <option value="$PROJECT_DIR$/crud/migrations/serializer.py" />
         <option value="$PROJECT_DIR$/crud/serializer.py" />
         <option value="$PROJECT_DIR$/prueba/urls.py" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
         <option value="$PROJECT_DIR$/prueba/router.py" />
         <option value="$PROJECT_DIR$/crud/models.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
         <option value="$PROJECT_DIR$/crud/viewsets.py" />
       </list>
     </option>
@@ -285,12 +300,12 @@
       <option name="presentableId" value="Default" />
       <updated>1583279988293</updated>
       <workItem from="1583279989735" duration="24040000" />
-      <workItem from="1583417484454" duration="15905000" />
+      <workItem from="1583417484454" duration="18187000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39945000" />
+    <option name="totallyTimeSpent" value="42227000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -305,8 +320,8 @@
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Favorites" order="0" sideWeight="0.5106383" side_tool="true" visible="true" weight="0.17167382" />
-      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.4893617" visible="true" weight="0.17167382" />
+      <window_info id="Favorites" order="0" sideWeight="0.512275" side_tool="true" visible="true" weight="0.17167382" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.48772505" visible="true" weight="0.17167382" />
       <window_info id="Structure" order="2" sideWeight="0.5009276" side_tool="true" weight="0.16881259" />
       <window_info anchor="bottom" id="Database Changes" order="0" />
       <window_info anchor="bottom" id="Terminal" order="1" weight="0.35060242" />
@@ -322,7 +337,7 @@
       <window_info anchor="bottom" id="Cvs" order="11" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="12" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="13" weight="0.32918397" />
-      <window_info anchor="right" id="Database" order="0" visible="true" weight="0.2546495" />
+      <window_info anchor="right" id="Database" order="0" visible="true" weight="0.2811159" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="SciView" order="2" />
       <window_info anchor="right" id="Ant Build" order="3" weight="0.25" />
@@ -370,13 +385,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://bd12c120-96e9-4554-91ce-25df46365c10/schema/main/table/crud_statuscarrito">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://bd12c120-96e9-4554-91ce-25df46365c10/schema/main/table/auth_user">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -411,14 +419,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/lib/python2.7/site-packages/django/core/handlers/base.py">
+    <entry file="file://$PROJECT_DIR$/venv/lib/python2.7/site-packages/django/db/models/query.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="186" selection-start-line="186" selection-end-line="186" />
+        <state relative-caret-position="188">
+          <caret line="379" selection-start-line="379" selection-end-line="379" />
         </state>
       </provider>
     </entry>
-    <entry file="das://bd12c120-96e9-4554-91ce-25df46365c10/schema/main/table/crud_cart">
+    <entry file="das://bd12c120-96e9-4554-91ce-25df46365c10/schema/main/table/crud_statuscarrito">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
@@ -432,17 +440,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/lib/python2.7/site-packages/django/db/models/query.py">
+    <entry file="file://$PROJECT_DIR$/venv/lib/python2.7/site-packages/django/core/handlers/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="379" selection-start-line="379" selection-end-line="379" />
+        <state relative-caret-position="195">
+          <caret line="186" selection-start-line="186" selection-end-line="186" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python2.7/site-packages/django/core/handlers/exception.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://bd12c120-96e9-4554-91ce-25df46365c10/schema/main/table/crud_cart">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/crud/viewsets.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="89" column="61" selection-start-line="89" selection-start-column="61" selection-end-line="89" selection-end-column="61" />
+        <state relative-caret-position="214">
+          <caret line="190" column="9" selection-start-line="190" selection-start-column="9" selection-end-line="190" selection-end-column="9" />
           <folding>
             <element signature="e#0#46#0" expanded="true" />
           </folding>
